@@ -28,7 +28,7 @@ public class UserServices(DB _db)
             throw new ArgumentNullException(nameof(userDto), "User cannot be null");
         var user = new User
         {
-            Name = userDto.Name,
+            UserName = userDto.UserName,
             Email = userDto.Email,
             Password = userDto.Password,
             Role = userDto.Role
@@ -46,7 +46,7 @@ public class UserServices(DB _db)
         if (existingUser == null)
             throw new Exception("User not found");
 
-        existingUser.Name = userDto.Name;
+        existingUser.UserName = userDto.UserName;
         existingUser.Email = userDto.Email;
         existingUser.Password = userDto.Password;
         existingUser.Role = userDto.Role;

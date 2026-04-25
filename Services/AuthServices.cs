@@ -14,7 +14,7 @@ public class AuthServices(DB _dB, IConfiguration configuration)
     public async Task RegisterAsync(RegisterUserDto registerUser)
     {
         // Check for duplicate username
-        var usernameExists = await _dB.Users.AnyAsync(m => m.Name == registerUser.Name);
+        var usernameExists = await _dB.Users.AnyAsync(m => m.UserName == registerUser.UserName);
 
         if (usernameExists)
         {
@@ -28,7 +28,7 @@ public class AuthServices(DB _dB, IConfiguration configuration)
 
         User user = new User
         {
-            Name = registerUser.Name,
+            UserName = registerUser.UserName,
             Email = registerUser.Email,
             Password = registerUser.Password,
             Role = registerUser.Role
@@ -40,7 +40,7 @@ public class AuthServices(DB _dB, IConfiguration configuration)
 
     public async Task<string> LoginAsync(LoginUserDto loginUser)
     {
-        var user = await _dB.Users.FirstOrDefaultAsync(m => m.Name == loginUser.Name);
+        var user = await _dB.Users.FirstOrDefaultAsync(m => m.UserName == loginUser.UserName);
 
         if (user == null || user.Password != loginUser.Password)
         {
@@ -60,7 +60,7 @@ public class AuthServices(DB _dB, IConfiguration configuration)
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Name ?? string.Empty),
+            new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
             new Claim(ClaimTypes.Role, user.Role ?? string.Empty)
         };
 

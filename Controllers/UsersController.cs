@@ -4,7 +4,7 @@ using WebProjectAPIs.Models.DTOs;
 using WebProjectAPIs.Services;
 
 // ---------------------------------------------------------------------------------------------
-[Authorize(Roles = "admin")] // Only allow users with the "admin" role to access this controller
+// [Authorize(Roles = "admin")] // Only allow users with the "admin" role to access this controller
 // ---------------------------------------------------------------------------------------------
 
 [ApiController]
